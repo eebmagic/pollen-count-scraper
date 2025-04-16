@@ -1,11 +1,16 @@
+#!/usr/bin/python3
+
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from pathlib import Path
+import pathlib
 import mail
 
+container = pathlib.Path(__file__).parent
+
+# Constants
 URL = "https://www.atlantaallergy.com/pollen_counts"
-CSV_PATH = Path("pollen_counts.csv")
+CSV_PATH = container / "pollen_counts.csv"
 
 # Load existing data if file exists
 if CSV_PATH.exists():

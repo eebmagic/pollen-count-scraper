@@ -11,6 +11,7 @@ container = pathlib.Path(__file__).parent
 # Constants
 URL = "https://www.atlantaallergy.com/pollen_counts"
 CSV_PATH = container / "pollen_counts.csv"
+SHOULD_SEND_EMAIL = False
 
 # Load existing data if file exists
 if CSV_PATH.exists():
@@ -41,7 +42,8 @@ if not (df.tail(10)['date'] == date).any():
     print(f"Added new entry: {date} - {count}")
 
     # Send email message
-    mail.send(f"Today's pollen count: {count}")
+    if SHOULD_SEND_EMAIL:
+        mail.send(f"Today's pollen count: {count}")
 else:
     print(f"Date {date} already exists in recent entries, skipping.")
 
